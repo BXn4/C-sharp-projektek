@@ -27,6 +27,8 @@ namespace BoltCon
                 10,20
             };
             int egyenleg = 8000;
+            int egyenlegcheck = 0;
+            Console.Title = $"Egyenleged: {egyenleg} Ft";
             Console.WriteLine("Termékek kilistázása: termekek\nSaját cuccok: cuccok\nVétel: vesz {termeknev} {db}\nEladás: elad {termeknev} {db}\nÚj termék hozzáadása: hozzaad {termeknev} {ar}\nEgyenleg: egyenleg");
             bevitel:
             Console.Write("\n>>: ");
@@ -59,9 +61,19 @@ namespace BoltCon
                     {
                         if (termekneve == termekek[i])
                         {
-                            Console.WriteLine($"Sikeresen vettél {veteldb}db {termekneve}-t!");
-                            cuccok.Add($"{termekneve}");
-                            mennyiseg.Add(veteldb);
+                            egyenlegcheck = egyenleg - (termekekara[i] *veteldb);
+                            if (egyenlegcheck > -1)
+                            {
+                                egyenleg = egyenleg - (termekekara[i] * veteldb);
+                                Console.WriteLine($"Sikeresen vettél {veteldb}db {termekneve}-t!");
+                                cuccok.Add($"{termekneve}");
+                                mennyiseg.Add(veteldb);
+                                Console.Title = $"Egyenleged: {egyenleg} Ft";
+                            }
+                            else
+                            {
+                                Console.WriteLine("Nincs elég pénzed!");
+                            }
                         }
                     }
                 }
