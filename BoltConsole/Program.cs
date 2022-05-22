@@ -54,25 +54,42 @@ namespace BoltCon
                 string[] tomb = parancs.Split(' ');
                 string bevitel = tomb[0];
                 string termekneve = tomb[1];
-                int veteldb = Convert.ToInt32(tomb[2]);
+                int db = Convert.ToInt32(tomb[2]);
                 if (bevitel == "vetel")
                 {
                     for (int i = 0; i < termekek.Count; i++)
                     {
                         if (termekneve == termekek[i])
                         {
-                            egyenlegcheck = egyenleg - (termekekara[i] *veteldb);
+                            egyenlegcheck = egyenleg - (termekekara[i] * db);
                             if (egyenlegcheck > -1)
                             {
-                                egyenleg = egyenleg - (termekekara[i] * veteldb);
-                                Console.WriteLine($"Sikeresen vettél {veteldb}db {termekneve}-t!");
+                                egyenleg = egyenleg - (termekekara[i] * db);
+                                Console.WriteLine($"Sikeresen vettél {db}db {termekneve}-t!");
                                 cuccok.Add($"{termekneve}");
-                                mennyiseg.Add(veteldb);
+                                mennyiseg.Add(db);
                                 Console.Title = $"Egyenleged: {egyenleg} Ft";
                             }
                             else
                             {
                                 Console.WriteLine("Nincs elég pénzed!");
+                            }
+                        }
+                    }
+                }
+                if (bevitel == "elad")
+                {
+                    for (int i = 0; i < cuccok.Count; i++)
+                    {
+                        if (termekneve == cuccok[i])
+                        {
+                            if (db <= mennyiseg[i])
+                            {
+                                mennyiseg.Remove(mennyiseg[i]);
+                            }
+                            if(mennyiseg[i] == 0)
+                            {
+                                cuccok.Remove($"{cuccok[i]}");
                             }
                         }
                     }
