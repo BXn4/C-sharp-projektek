@@ -55,7 +55,7 @@ namespace BoltCon
                 string bevitel = tomb[0];
                 string termekneve = tomb[1];
                 int db = Convert.ToInt32(tomb[2]);
-                if (bevitel == "vetel")
+                if (bevitel == "vesz")
                 {
                     for (int i = 0; i < termekek.Count; i++)
                     {
