@@ -66,9 +66,16 @@ namespace BoltCon
                             {
                                 egyenleg = egyenleg - (termekekara[i] * db);
                                 Console.WriteLine($"Sikeresen vettél {db}db {termekneve}-t!");
-                                cuccok.Add($"{termekneve}");
-                                mennyiseg.Add(db);
                                 Console.Title = $"Egyenleged: {egyenleg} Ft";
+                                if (!cuccok.Contains(termekneve))
+                                {
+                                    cuccok.Add($"{termekneve}");
+                                    mennyiseg.Add(db);
+                                }
+                                else if(termekneve == termekek[i])
+                                {
+                                    mennyiseg[i] += db;
+                                }
                             }
                             else
                             {
@@ -77,7 +84,7 @@ namespace BoltCon
                         }
                     }
                 }
-                //ezt majd később megoldom, nagyon elszúrtam itt, de majd megoldom xD
+                //javitas hamarosan (nincs kesz teljesen)
                 if (bevitel == "elad")
                 {
                     for (int i = 0; i < cuccok.Count; i++)
