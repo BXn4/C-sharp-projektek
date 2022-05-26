@@ -72,7 +72,7 @@ namespace BoltCon
                                     cuccok.Add($"{termekneve}");
                                     mennyiseg.Add(db);
                                 }
-                                else if(termekneve == termekek[i])
+                                else
                                 {
                                     mennyiseg[i] += db;
                                 }
