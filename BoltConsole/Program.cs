@@ -77,6 +77,7 @@ namespace BoltCon
                         }
                     }
                 }
+                //ezt majd később megoldom, nagyon elszúrtam itt, de majd megoldom xD
                 if (bevitel == "elad")
                 {
                     for (int i = 0; i < cuccok.Count; i++)
