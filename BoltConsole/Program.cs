@@ -94,6 +94,12 @@ namespace BoltCon
                         }
                     }
                 }
+                if(bevitel == "hozzaad")
+                {
+                    termekek.Add(termekneve);
+                    termekekara.Add(db);
+                    Console.WriteLine($"Sikeresen bővítetted a listát a(z) {termekneve} termékkel.\nÁra: {db}Ft/db ");
+                }
             }
             catch
             {
