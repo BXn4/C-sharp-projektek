@@ -12,6 +12,7 @@ namespace Fuggvenyabrazolas
     {
         static void Main(string[] args)
         {
+            eleje:
             Console.Write("Kérem a maximális magasságot: ");
             string maxmagassag = Console.ReadLine();
             int y = Convert.ToInt32(maxmagassag);
@@ -20,6 +21,11 @@ namespace Fuggvenyabrazolas
             int x = Convert.ToInt32(maxtavolsag);
             Console.Clear();
             var xcord = new List<string> { " " };
+            if(y == 0 || x == 0)
+            {
+                //Console.Clear();
+                goto eleje;
+            }
             for (int i = 0; i < y; i++)
             {
                 for (int e = 0; e < x * 2; e++)
