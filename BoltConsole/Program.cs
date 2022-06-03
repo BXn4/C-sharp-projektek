@@ -20,11 +20,11 @@ namespace BoltCon
             };
             var cuccok = new List<string>
             {
-                "Alma","Eper"
+                "Alma","Eper","Görögdinnye","Uborka","Saláta","Répa","Tök","Meggy","Hagyma","Paradicsom"
             };
             var mennyiseg = new List<int>
             {
-                10,20
+                10,20,2,1,4,5,1,10,2,2
             };
             int egyenleg = 8000;
             int egyenlegcheck = 0;
@@ -40,7 +40,11 @@ namespace BoltCon
                     Console.WriteLine($"\t{termekek[i]}, ár: {termekekara[i]} Ft/db");
                 }
             }
-            if(parancs == "cuccok")
+            if (parancs == "egyenleg")
+            {
+                Console.WriteLine($"Egyenleged: {egyenleg} Ft");
+            }
+            if (parancs == "cuccok")
             {
                 for (int i = 0; i < cuccok.Count; i++)
                 {
@@ -49,6 +53,9 @@ namespace BoltCon
             }
             try
             {
+
+                //Ez így fog maradni, nem szeretnék már vele foglalkozni
+
                 //string termekneve = parancs;
                 //int veteldb = Convert.ToInt32(parancs);
                 string[] tomb = parancs.Split(' ');
@@ -67,6 +74,11 @@ namespace BoltCon
                                 egyenleg = egyenleg - (termekekara[i] * db);
                                 Console.WriteLine($"Sikeresen vettél {db}db {termekneve}-t!");
                                 Console.Title = $"Egyenleged: {egyenleg} Ft";
+                               /* Dictionary<string, int> szotar = new Dictionary<string, int>();
+                                if(szotar.ContainsKey(termekneve))
+                                {
+                                    szotar[termekneve]++;
+                                }*/
                                 if (!cuccok.Contains(termekneve))
                                 {
                                     cuccok.Add($"{termekneve}");
@@ -74,7 +86,15 @@ namespace BoltCon
                                 }
                                 else
                                 {
-                                    mennyiseg[i] += db;
+                                    try
+                                    {
+                                        mennyiseg[i] += db;
+                                    }
+                                    catch
+                                    {
+                                        cuccok.Add($"{termekneve}");
+                                        mennyiseg.Add(db);
+                                    }
                                 }
                             }
                             else
@@ -84,20 +104,27 @@ namespace BoltCon
                         }
                     }
                 }
-                //javitas hamarosan (nincs kesz teljesen)
                 if (bevitel == "elad")
                 {
                     for (int i = 0; i < cuccok.Count; i++)
                     {
-                        if (termekneve == cuccok[i])
+                        if(termekneve == cuccok[i])
                         {
-                            if (db <= mennyiseg[i])
+                            if(db > mennyiseg[i])
                             {
-                                mennyiseg.Remove(mennyiseg[i]);
+                                Console.WriteLine($"Neked csak {mennyiseg[i]} {termekneve}-d van!");
+                            }
+                            else
+                            {
+                                mennyiseg[i] -= db;
+                                Console.WriteLine($"Sikeresen eladtál {db}db {termekneve}-t!");
+                                egyenleg += termekekara[i] * db;
+                                Console.Title = $"Egyenleged: {egyenleg} Ft";
                             }
                             if(mennyiseg[i] == 0)
                             {
                                 cuccok.Remove($"{cuccok[i]}");
+                                mennyiseg.Remove(mennyiseg[i]);
                             }
                         }
                     }
